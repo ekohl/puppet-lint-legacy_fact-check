@@ -86,6 +86,22 @@ describe 'legacy_fact' do
       end
     end
 
+    context 'code using legacy fact with complex replacement' do
+      let(:code) { "$memoryfree_mb" }
+
+      it 'should not detect a single problems' do
+        expect(problems).to have(1).problem
+      end
+
+      it 'should fix the problem' do
+        expect(problems).to contain_fixed(msg).on_line(1).in_column(1)
+      end
+
+      it 'should replace with the complex replacement' do
+        expect(manifest).to eq("$facts['memory']['system']['available_bytes'] / 1024 / 1024")
+      end
+    end
+
     context 'code using modern fact' do
       let(:code) { "$facts['os']['name']" }
 
