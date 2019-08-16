@@ -64,7 +64,7 @@ describe 'legacy_fact' do
           expect(problems).to contain_fixed(msg).on_line(1).in_column(1)
         end
 
-        it 'should add a newline to the end of the manifest' do
+        it 'should replace with the modern fact' do
           expect(manifest).to eq(replacement)
         end
       end
