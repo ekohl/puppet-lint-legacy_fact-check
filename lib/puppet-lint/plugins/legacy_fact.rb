@@ -1,7 +1,7 @@
 PuppetLint.new_check(:legacy_fact) do
   LEGACY_FACTS_STATIC = {
     'architecture' => "facts['os']['architecture']",
-    'augeasversion' => "",
+    'augeasversion' => "facts['augeas']['version']",
     'blockdevices' => "", # TODO facts['disks'].keys() + join()
     'bios_release_date' => "facts['dmi']['bios']['release_date']",
     'bios_vendor' => "facts['dmi']['bios']['vendor']",
@@ -36,7 +36,7 @@ PuppetLint.new_check(:legacy_fact) do
     'macosx_productversion' => "",
     'macosx_productversion_major' => "",
     'macosx_productversion_minor' => "",
-    'manufacturer' => "",
+    'manufacturer' => "facts['dmi']['manufacturer']",
     'memoryfree' => "facts['memory']['system']['available']",
     'memoryfree_mb' => "facts['memory']['system']['available_bytes'] / 1024 / 1024",
     'memorysize' => "facts['memory']['system']['total']",
@@ -73,7 +73,7 @@ PuppetLint.new_check(:legacy_fact) do
     'uptime_hours' => "facts['system_update']['hours']",
     'uptime_seconds' => "facts['system_update']['seconds']",
     'uuid' => "",
-    'xendomains' => "",
+    'xendomains' => "", # TODO facts['xen']['domains'] + join()
     'zonename' => "",
     'zones' => "",
   }
