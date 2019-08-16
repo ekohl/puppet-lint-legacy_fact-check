@@ -70,6 +70,22 @@ describe 'legacy_fact' do
       end
     end
 
+    context 'code using legacy fact without replacement' do
+      let(:code) { "$macosx_buildversion" }
+
+      it 'should detect a single problem' do
+        expect(problems).to have(1).problem
+      end
+
+        it 'should not fix the problem' do
+          expect(problems).to contain_warning(msg).on_line(1).in_column(1)
+        end
+
+      it 'should not modify the manifest' do
+        expect(manifest).to eq(code)
+      end
+    end
+
     context 'code using modern fact' do
       let(:code) { "$facts['os']['name']" }
 

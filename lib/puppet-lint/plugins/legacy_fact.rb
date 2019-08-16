@@ -1,5 +1,6 @@
 PuppetLint.new_check(:legacy_fact) do
   LEGACY_FACTS_STATIC = {
+    'macosx_buildversion' => "",
     'operatingsystem' => "facts['os']['release']",
   }
 
@@ -23,7 +24,9 @@ PuppetLint.new_check(:legacy_fact) do
   end
 
   def fix(problem)
-    problem[:token].value = replacement_fact(normalize_fact(problem[:token].value))
+    replacement = replacement_fact(normalize_fact(problem[:token].value))
+    raise PuppetLint::NoFix if replacement.nil? || replacement.empty?
+    problem[:token].value = replacement
   end
 
   private
@@ -51,6 +54,6 @@ PuppetLint.new_check(:legacy_fact) do
   end
 
   def replacement_fact(fact)
-    find_static_fact(fact) || find_regex_fact(fact) || fact
+    find_static_fact(fact) || find_regex_fact(fact)
   end
 end
