@@ -17,9 +17,12 @@ Gem::Specification.new do |spec|
     A puppet-lint plugin to check that manifest files don't use legacy facts.
   EOF
 
+  spec.required_ruby_version = '>= 2.0.0'
+
   spec.add_dependency             'puppet-lint', '~> 2.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rspec-its', '~> 1.0'
   spec.add_development_dependency 'rspec-collection_matchers', '~> 1.0'
   spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'simplecov' # puppet-lint's spec helper requires this
 end
